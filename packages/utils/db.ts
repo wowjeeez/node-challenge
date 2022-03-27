@@ -1,15 +1,19 @@
-import { Client } from 'pg';
 import config from 'config';
+import { PrismaClient } from '@prisma/client';
+import { userInfo } from 'os';
 
-let db;
+let db: PrismaClient;
 
 export function connect() {
-  db = new Client(config.db);
-  return db.connect();
+  db = new PrismaClient({
+    datasources: {
+      db: {
+        url: `postgresql://${userInfo().username}:${(<any>config.db).password}@${config.db.host}:${config.db.port}/${config.db.database}`,
+      },
+    },
+  });
 }
 
-export async function query(queryString: string, parameters?: any) {
-  if (!db) await connect();
-
-  return db.query(queryString, parameters);
+export function database(): PrismaClient {
+  return db;
 }

@@ -1,4 +1,5 @@
 import config from 'config';
+import { connect } from '@nc/utils/db';
 import context from './middleware/context';
 import express from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
@@ -8,12 +9,13 @@ import security from './middleware/security';
 import { router as userRoutes } from '@nc/domain-user';
 import { createServer as createHTTPServer, Server } from 'http';
 import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
+import { router as transactionRoutes } from '@nc/domain-expense';
 
 const logger = Logger('server');
 const app = express();
 const server: Server | SecureServer = (config.https.enabled === true) ? createHTTPSServer(config.https, app as any) : createHTTPServer(app as any);
 server.ready = false;
-
+connect();
 gracefulShutdown(server);
 
 app.use(helmet());
@@ -30,8 +32,9 @@ app.use(context);
 app.use(security);
 
 app.use('/user', userRoutes);
+app.use('/expenses', transactionRoutes);
 
-app.use(function(err, req, res) {
+app.use(function(err, req, res, next) {
   res.status(500).json(err);
 });
 

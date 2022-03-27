@@ -1,7 +1,3 @@
-export interface User {
-    id: string
-    first_name: string
-    last_name: string
-    company_name: string
-    ssn: string
-}
+import { users } from '@prisma/client';
+
+export type User = NonNullable<users>
