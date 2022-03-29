@@ -31,5 +31,5 @@ module.exports = {
     '<rootDir>/test/utils/jest/error-matchers.ts',
   ],
   testEnvironment: 'node',
-  globalSetup: '<rootDir>/test/utils/jest/serverinit.ts',
+  globalSetup: '<rootDir>/test/utils/jest/init.ts',
 };
