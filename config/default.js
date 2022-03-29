@@ -24,4 +24,5 @@ module.exports = {
     serverClose: 100,
   },
   auth: {},
+  allowedOrigins: '*',
 };

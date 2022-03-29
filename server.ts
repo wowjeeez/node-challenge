@@ -1,6 +1,7 @@
 import config from 'config';
 import { connect } from '@nc/utils/db';
 import context from './middleware/context';
+import cors from 'cors'
 import express from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import helmet from 'helmet';
@@ -17,8 +18,11 @@ const server: Server | SecureServer = (config.https.enabled === true) ? createHT
 server.ready = false;
 connect();
 gracefulShutdown(server);
-
 app.use(helmet());
+app.use(cors({
+  origin: config.allowedOrigins,
+}));
+
 app.get('/readycheck', function readinessEndpoint(req, res) {
   const status = (server.ready) ? 200 : 503;
   res.status(status).send(status === 200 ? 'OK' : 'NOT OK');
