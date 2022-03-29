@@ -13,8 +13,8 @@
     "node": ">=16"
   },
   "scripts": {
-    "watch": "nodemon $npm_package_main",
-    "start": "node $npm_package_main",
+    "watch": "cross-env NODE_DEBUG=DEBUG nodemon index.js",
+    "start": "node .",
     "lint": "eslint --ext .ts --ext .js .",
     "lint:fix": "eslint --ext .ts --ext .js . --fix",
     "test": "yarn test:unit && yarn test:mid-level",
@@ -45,6 +45,9 @@
     "@nc/domain-user": "0.0.0",
     "@nc/utils": "0.0.0",
     "@prisma/client": "^3.11.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "class-transformer": "^0.5.1",
     "config": "^3.3.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.3",
