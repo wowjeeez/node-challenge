@@ -12,7 +12,7 @@ export async function getUserDetails(userId): Promise<User> {
   const [dbError, rawUser] = await to(readUser(userId));
 
   if (dbError) {
-    throw InternalError(`Error fetching data from the DB: ${dbError.message}`);
+    throw InternalError('Error fetching data from the DB.');
   }
 
   if (!rawUser) {

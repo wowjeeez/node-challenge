@@ -1,8 +1,8 @@
 import { database } from '@nc/utils/db';
-import { Fetch } from '../dto/get.dto';
+import { FetchExpenses } from '../dto/get.dto';
 import { to } from '@nc/utils/async';
 
-const FIELD_MAP: Record<Fetch['filterBy'], string> = {
+const FIELD_MAP: Record<FetchExpenses['filterBy'], string> = {
   amount: 'amount_in_cents',
   merchname: 'merchant_name',
   date: 'date_created',
@@ -11,7 +11,7 @@ const FIELD_MAP: Record<Fetch['filterBy'], string> = {
   status: 'status',
 };
 
-const createFilterQuery = (data: Fetch) => {
+const createFilterQuery = (data: FetchExpenses) => {
   if (data.filterBy === 'none' || !data.filter) {
     return {};
   }
@@ -27,20 +27,20 @@ const createFilterQuery = (data: Fetch) => {
   }
   const fieldName = FIELD_MAP[data.filterBy];
   const queryObj = {};
-  queryObj[fieldName] = { contains: data.filter };
+  queryObj[fieldName] = { contains: data.filter, mode: 'insensitive' };
   return queryObj;
 };
 
-const paginate = (data: Fetch) => ({
-  skip: data.pageId * data.pageSize,
-  take: data.pageSize,
+const paginate = (data: FetchExpenses) => ({
+  skip: parseInt(data.pageId) * parseInt(data.pageSize),
+  take: parseInt(data.pageSize),
 });
 
-const orderBy = (data: Fetch) => ({
-  orderBy: [{ [FIELD_MAP[data.sortBy]]: data.ascending ? 'asc' : 'desc' }],
+const orderBy = (data: FetchExpenses) => ({
+  orderBy: [{ [FIELD_MAP[data.orderBy]]: data.ascending === '1' ? 'asc' : 'desc' }],
 });
 
-export async function fetchUserTransactions(query: Fetch) {
+export async function fetchUserTransactions(query: FetchExpenses) {
   return await to(database().expenses.findMany({
     ...paginate(query),
     ...orderBy(query),

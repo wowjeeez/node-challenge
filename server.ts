@@ -1,7 +1,7 @@
 import config from 'config';
 import { connect } from '@nc/utils/db';
 import context from './middleware/context';
-import cors from 'cors'
+import cors from 'cors';
 import express from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import helmet from 'helmet';
@@ -13,7 +13,8 @@ import { createServer as createHTTPSServer, Server as SecureServer } from 'https
 import { router as transactionRoutes } from '@nc/domain-expense';
 const xss = require('xss-clean');
 
-
+// noop function to start the server and allow express to start/db to connect
+export const hook = () => {};
 const logger = Logger('server');
 const app = express();
 const server: Server | SecureServer = (config.https.enabled === true) ? createHTTPSServer(config.https, app as any) : createHTTPServer(app as any);

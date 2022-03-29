@@ -83,11 +83,8 @@ export function Conflict(message: string, context?: any, parentError?: ApiErrorT
 export function InternalError(message: string, context?: any, parentError?: ApiErrorType | Error): ApiErrorType {
   return new ApiError(parentError, 500, message, 'Internal Server Error', context);
 }
-export function ValidationError(errStr: string, ctx?: any) {
-  const errLine = errStr.split('\n')[1];
+export function ValidationError(err: ApiErrorType | Error | undefined, ctx?: any) {
+  const errLine = err.toString().split('\n')[1];
   const failedProp = errLine.split('property')[1].split(' ')[1]; // hacky way to get the failed prop
-  return { message: `Field '${failedProp}' has failed the validation.`, status: 401,
-    id: ctx?.id,
-    url: ctx?.url,
-    headers: ctx?.headers && trimSecure(ctx.headers) };
+  return new ApiError(err, 401, `Field '${failedProp}' has failed the validation.`, 'Validation error', ctx);
 }

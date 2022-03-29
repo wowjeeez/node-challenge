@@ -1,33 +1,29 @@
-import {IsBoolean, IsIn, IsNumber, IsOptional, IsString, IsUUID, Length, Matches, Min} from 'class-validator';
+import { IsIn, IsNumberString, IsOptional, IsString, IsUUID, Min } from 'class-validator';
 const SORT_METHODS = ['amount', 'date', 'status', 'merchname'] as const;
 const FILTER_METHODS = ['amount', 'date', 'status', 'merchname', 'none', 'currency'] as const;
 /* eslint-disable */
-export class Fetch {
+export class FetchExpenses {
    @IsIn(FILTER_METHODS)
    @IsOptional()
    filterBy: typeof FILTER_METHODS[number] = 'none';
 
    @IsString()
-   @IsOptional()
    filter: string = '';
 
    @IsIn(SORT_METHODS)
-   @IsOptional()
-   sortBy: typeof SORT_METHODS[number] = "date";
+   orderBy: typeof SORT_METHODS[number] = "date";
 
-   @IsBoolean()
+   @IsIn(['0', '1'])
    @IsOptional()
-   ascending: boolean = false;
+   ascending: string = '0';
 
-   @IsNumber()
-   @Min(0)
+   @IsNumberString()
    @IsOptional()
-   pageId: number = 0;
+   pageId: string = '0';
 
-   @IsNumber()
-   @Min(1)
+   @IsNumberString()
    @IsOptional()
-   pageSize: number = 10;
+   pageSize: string = '10';
 
    @IsString()
    @IsUUID()
