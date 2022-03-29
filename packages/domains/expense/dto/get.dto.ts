@@ -1,4 +1,4 @@
-import { IsBoolean, IsIn, IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import {IsBoolean, IsIn, IsNumber, IsOptional, IsString, IsUUID, Length, Matches, Min} from 'class-validator';
 const SORT_METHODS = ['amount', 'date', 'status', 'merchname'] as const;
 const FILTER_METHODS = ['amount', 'date', 'status', 'merchname', 'none', 'currency'] as const;
 /* eslint-disable */
@@ -30,5 +30,6 @@ export class Fetch {
    pageSize: number = 10;
 
    @IsString()
+   @IsUUID()
    userId: string
 }

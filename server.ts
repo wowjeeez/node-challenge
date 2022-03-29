@@ -11,6 +11,8 @@ import { router as userRoutes } from '@nc/domain-user';
 import { createServer as createHTTPServer, Server } from 'http';
 import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
 import { router as transactionRoutes } from '@nc/domain-expense';
+const xss = require('xss-clean');
+
 
 const logger = Logger('server');
 const app = express();
@@ -22,7 +24,7 @@ app.use(helmet());
 app.use(cors({
   origin: config.allowedOrigins,
 }));
-
+app.use(xss());
 app.get('/readycheck', function readinessEndpoint(req, res) {
   const status = (server.ready) ? 200 : 503;
   res.status(status).send(status === 200 ? 'OK' : 'NOT OK');
