@@ -1,3 +1,4 @@
+import config from 'config';
 import { database } from '@nc/utils/db';
 import { FetchExpenses } from '../dto/get.dto';
 import { to } from '@nc/utils/async';
@@ -31,8 +32,10 @@ const createFilterQuery = (data: FetchExpenses) => {
   return queryObj;
 };
 
+export const capPageSize = (size: number) => (size > config.pageSizeCap ? config.pageSizeCap : size);
+
 const paginate = (data: FetchExpenses) => ({
-  skip: parseInt(data.pageId) * parseInt(data.pageSize),
+  skip: parseInt(data.pageId) * capPageSize(parseInt(data.pageSize)),
   take: parseInt(data.pageSize),
 });
 
@@ -40,7 +43,8 @@ const orderBy = (data: FetchExpenses) => ({
   orderBy: [{ [FIELD_MAP[data.orderBy]]: data.ascending === '1' ? 'asc' : 'desc' }],
 });
 
-export async function fetchUserTransactions(query: FetchExpenses) {
+
+export async function fetchUserTransactions<T extends boolean>(query: FetchExpenses) {
   return await to(database().expenses.findMany({
     ...paginate(query),
     ...orderBy(query),

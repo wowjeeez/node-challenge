@@ -1,6 +1,7 @@
-import { IsIn, IsNumberString, IsOptional, IsString, IsUUID, Min } from 'class-validator';
+import { IsIn, IsNumberString, IsOptional, IsString, IsUUID } from 'class-validator';
 const SORT_METHODS = ['amount', 'date', 'status', 'merchname'] as const;
 const FILTER_METHODS = ['amount', 'date', 'status', 'merchname', 'none', 'currency'] as const;
+
 /* eslint-disable */
 export class FetchExpenses {
    @IsIn(FILTER_METHODS)
@@ -28,4 +29,5 @@ export class FetchExpenses {
    @IsString()
    @IsUUID()
    userId: string
+
 }

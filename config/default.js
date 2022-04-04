@@ -25,4 +25,5 @@ module.exports = {
   },
   auth: {},
   allowedOrigins: '*',
+  pageSizeCap: 50,
 };

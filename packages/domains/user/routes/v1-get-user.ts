@@ -1,7 +1,6 @@
 import { FetchUser } from '../dto/get.dto';
 import { getUserDetails } from '../model';
 import { Router } from 'express';
-import { secureTrim } from '../formatter';
 import { to } from '@nc/utils/async';
 import { transformAndValidate } from 'class-transformer-validator';
 import { ApiError, ValidationError } from '@nc/utils/errors';
@@ -24,5 +23,5 @@ router.get('/get-user-details', async (req, res, next) => {
     return res.json({});
   }
 
-  return res.json(secureTrim(userDetails));
+  return res.json(userDetails);
 });
