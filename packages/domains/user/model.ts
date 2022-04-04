@@ -1,14 +1,11 @@
+import { CreateUser } from './dto/create.dto';
 import { format } from './formatter';
-import { readUser } from './data/db-user';
 import { to } from '@nc/utils/async';
 import { User } from './types';
-import { BadRequest, InternalError, NotFound } from '@nc/utils/errors';
+import { generateUser, readUser } from './data/db-user';
+import { InternalError, NotFound } from '@nc/utils/errors';
 
 export async function getUserDetails(userId): Promise<User> {
-  if (!userId) {
-    throw BadRequest('userId property is missing.');
-  }
-
   const [dbError, rawUser] = await to(readUser(userId));
 
   if (dbError) {
@@ -20,4 +17,13 @@ export async function getUserDetails(userId): Promise<User> {
   }
 
   return format(rawUser);
+}
+
+export async function createUser(dto: CreateUser) {
+  const final = await dto.generate();
+  const [dbError] = await to(generateUser(final));
+
+  if (dbError) {
+    throw InternalError('Error writing data to the DB.');
+  }
 }

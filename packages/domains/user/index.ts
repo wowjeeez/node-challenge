@@ -1,6 +1,7 @@
+import { router as create } from './routes/v1-generate-user';
+import { router as getDetails } from './routes/v1-get-user';
 import { Router } from 'express';
-import { router as v1 } from './routes/v1-get-user';
 
 export const router = Router();
-
-router.use('/v1', v1);
+router.use('/v1/get-user-details', getDetails);
+router.use('/v1/create-user', create);

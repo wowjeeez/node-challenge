@@ -21,8 +21,9 @@ interface ConfigDefinition {
     auth: {
         jwtSecret: string
     }
-    allowedOrigins: (string | RegExp)[] | string,
+    allowedOrigins: (string | RegExp)[] | string
     pageSizeCap: number
+    bodyLimit: number | string // e.g: 100kb
 }
 
 declare module 'config' {

@@ -12,3 +12,12 @@ export function format(rawUser: User): User {
     company_name: rawUser.company_name,
   };
 }
+
+// flattens a maybe array into a for sure not array
+export function arrayToFlat<T>(val: T | T[]): T {
+  if (Array.isArray(val)) {
+    return val[0];
+  }
+
+  return val;
+}

@@ -4,6 +4,9 @@
 - I implemented 2 more routes alongside the required one, one to create users and to add transactions
 - In the user domain I got rid of the public fields logic and just fetched the fields that are public 
 - CORS is implemented with configurable origins (`allowedOrigins` config property)
+- .env file is needed only because of Prisma, to be able to connect to the database while pulling/pushing database info
+- Added JSON body parsing feature with 100kb body limit (configurable with the `bodyLimit` config property)
+
 # Design choices
 - I stuck with query parameter design and the expenses are filterable by amount, date, status, merchant name and currency and sortable by amount, date, status and merchant name
 - The endpoint supports paging and if omitted, the following default settings are used: 10 entries/page, and keeping track of the page id is the user's responsibility (to allow more flexible frontend design and to decrease complexity)

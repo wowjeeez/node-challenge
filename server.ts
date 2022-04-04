@@ -11,7 +11,7 @@ import { router as userRoutes } from '@nc/domain-user';
 import { createServer as createHTTPServer, Server } from 'http';
 import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
 import { router as transactionRoutes } from '@nc/domain-expense';
-const xss = require('xss-clean');
+const xss = require('xss-clean'); // no types :(
 
 // noop function to start the server and allow express to start/db to connect
 export const hook = () => {};
@@ -25,7 +25,10 @@ app.use(helmet());
 app.use(cors({
   origin: config.allowedOrigins,
 }));
+
 app.use(xss());
+app.use(express.json({ limit: config.bodyLimit }));
+
 app.get('/readycheck', function readinessEndpoint(req, res) {
   const status = (server.ready) ? 200 : 503;
   res.status(status).send(status === 200 ? 'OK' : 'NOT OK');

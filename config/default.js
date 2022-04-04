@@ -26,4 +26,5 @@ module.exports = {
   auth: {},
   allowedOrigins: '*',
   pageSizeCap: 50,
+  bodyLimit: '100kb',
 };

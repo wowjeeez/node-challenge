@@ -84,7 +84,11 @@ export function InternalError(message: string, context?: any, parentError?: ApiE
   return new ApiError(parentError, 500, message, 'Internal Server Error', context);
 }
 export function ValidationError(err: ApiErrorType | Error | undefined, ctx?: any) {
-  const errLine = err.toString().split('\n')[1];
-  const failedProp = errLine.split('property')[1].split(' ')[1]; // hacky way to get the failed prop
-  return new ApiError(err, 401, `Field '${failedProp}' has failed the validation.`, 'Validation error', ctx);
+  try {
+    const errLine = err.toString().split('\n')[1];
+    const failedProp = errLine.split('property')[1].split(' ')[1]; // hacky way to get the failed prop
+    return new ApiError(err, 401, `Field '${failedProp}' has failed the validation.`, 'Validation error', ctx);
+  } catch (_) {
+    return new ApiError(err, 401, 'Validation failed', 'Validation error', ctx);
+  }
 }

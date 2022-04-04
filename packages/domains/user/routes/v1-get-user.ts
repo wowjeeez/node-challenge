@@ -7,7 +7,7 @@ import { ApiError, ValidationError } from '@nc/utils/errors';
 
 export const router = Router();
 
-router.get('/get-user-details', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   const [validationErr, query] = await to(transformAndValidate(FetchUser, req.query));
   if (validationErr) {
     return next(ValidationError(validationErr, req));
