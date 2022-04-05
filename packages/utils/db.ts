@@ -1,7 +1,7 @@
 import config from 'config';
+import Logger from './logging';
 import { PrismaClient } from '@prisma/client';
 import { userInfo } from 'os';
-import Logger from '@nc/utils/logging';
 
 let db: PrismaClient;
 const logger = Logger('utils/database');

@@ -1,11 +1,9 @@
 import { AddExpense } from '../dto/add.dto';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import config from 'config';
 import { database } from '@nc/utils/db';
-import type { expenses } from '@prisma/client';
-
 import { FetchExpenses } from '../dto/get.dto';
 import { to } from '@nc/utils/async';
-import { v4 } from 'uuid';
 
 const FIELD_MAP: Record<FetchExpenses['filterBy'], string> = {
   amount: 'amount_in_cents',
@@ -48,6 +46,7 @@ const orderBy = (data: FetchExpenses) => ({
 });
 
 export async function fetchUserExpenses(query: FetchExpenses) {
+  // eslint-disable-next-line no-return-await
   return await to(database().expenses.findMany({
     ...paginate(query),
     ...orderBy(query),
@@ -65,6 +64,7 @@ export async function fetchUserExpenses(query: FetchExpenses) {
   }));
 }
 export async function addExpense(dto: AddExpense) {
+  // eslint-disable-next-line no-return-await
   return await to(database().expenses.create({
     data: {
       user_id: dto.userId,

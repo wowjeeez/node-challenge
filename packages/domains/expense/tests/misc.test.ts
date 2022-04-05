@@ -1,4 +1,5 @@
 import { capPageSize } from '../data/db-expenses';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import config from 'config';
 
 describe('[Packages | Expense-domain | DB] Query factories', () => {

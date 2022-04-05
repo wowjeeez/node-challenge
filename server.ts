@@ -7,10 +7,10 @@ import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import helmet from 'helmet';
 import Logger from '@nc/utils/logging';
 import security from './middleware/security';
+import { router as transactionRoutes } from '@nc/domain-expense';
 import { router as userRoutes } from '@nc/domain-user';
 import { createServer as createHTTPServer, Server } from 'http';
 import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
-import { router as transactionRoutes } from '@nc/domain-expense';
 const xss = require('xss-clean'); // no types :(
 
 const logger = Logger('server');
@@ -43,7 +43,7 @@ app.use(security);
 
 app.use('/user', userRoutes);
 app.use('/expenses', transactionRoutes);
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(function(err, req, res, next) {
   res.status(500).json(err);
 });

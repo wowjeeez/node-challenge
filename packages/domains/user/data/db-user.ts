@@ -14,6 +14,7 @@ export function readUser(userId) {
   }).then((resp) => resp);
 }
 
+// eslint-disable-next-line require-await
 export async function generateUser(dto: CreateUser) {
   return database().users.create({
     data: {

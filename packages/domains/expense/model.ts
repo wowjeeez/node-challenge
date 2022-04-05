@@ -1,10 +1,8 @@
-import { FetchExpenses } from './dto/get.dto';
-import { addExpense, fetchUserExpenses } from './data/db-expenses';
-import Logger from '@nc/utils/logging';
-import { InternalError, NotFound } from '@nc/utils/errors';
 import { AddExpense } from './dto/add.dto';
-import { expenses } from '@prisma/client';
-import { v4 } from 'uuid';
+import { FetchExpenses } from './dto/get.dto';
+import Logger from '@nc/utils/logging';
+import { addExpense, fetchUserExpenses } from './data/db-expenses';
+import { InternalError, NotFound } from '@nc/utils/errors';
 const logger = Logger('expenses/model');
 
 export async function getExpenses(data: FetchExpenses) {

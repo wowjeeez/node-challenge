@@ -1,6 +1,6 @@
 import { IsUserIdValid } from '@nc/domain-user/decorators/validator.decorator';
-import { IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 import { v4 } from 'uuid';
+import { IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class AddExpense {
     @MaxLength(255) // make sure it fits in the db!

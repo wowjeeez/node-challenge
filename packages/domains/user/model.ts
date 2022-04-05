@@ -1,9 +1,9 @@
 import { CreateUser } from './dto/create.dto';
 import { format } from './formatter';
+import { InternalError } from '@nc/utils/errors';
 import { to } from '@nc/utils/async';
 import { User } from './types';
 import { generateUser, readUser } from './data/db-user';
-import { InternalError } from '@nc/utils/errors';
 
 export async function getUserDetails(userId): Promise<User> {
   const [dbError, rawUser] = await to(readUser(userId));
