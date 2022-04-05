@@ -10,7 +10,7 @@
 - Moved user id validation into its own decorator, so any route that requires a valid user can just pass the `IsUserIdValid` decorator to its DTO and assume that each call contains a valid user (this does introduce some coupling but in my opinion it's worth the tradeoff)
 # Design choices
 - I stuck with query parameter design and the expenses are filterable by amount, date, status, merchant name and currency and sortable by amount, date, status and merchant name
-- The endpoint supports paging and if omitted, the following default settings are used: 10 entries/page, and keeping track of the page id is the user's responsibility (to allow more flexible frontend design and to decrease complexity)
+- The endpoint supports paging and if omitted, the following default settings are used: 10 entries/page. Keeping track of the page id is the user's responsibility (to allow more flexible frontend design and to decrease complexity).
 - Page size is capped at 50 entries (configurable under the `pageSizeCap` config property)
 - In the expenses domain, not every query factory is unit tested because I felt that endpoint tests would better suit this pipeline
 
