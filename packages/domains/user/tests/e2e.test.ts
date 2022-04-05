@@ -8,7 +8,7 @@ describe('[Packages | User-domain | E2E]', () => {
 
   test('should not fetch a user', async () => {
     const res = await Api.get('/user/v1/get-user-details?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a475').expect(500);
-    expect(res.body.status).toEqual(404);
+    expect(res.body.status).toEqual(401);
   });
 
   test('should create a new user', async () => {

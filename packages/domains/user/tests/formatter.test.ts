@@ -18,8 +18,6 @@ describe('[Packages | User-domain | Formatter] capitalize', () => {
   });
 });
 
-
-
 describe('[Packages | User-domain | Formatter] format', () => {
   test('format should return an instance of users that fits the API model, based on the db raw value', () => {
     return expect(format({

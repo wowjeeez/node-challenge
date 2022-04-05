@@ -1,7 +1,6 @@
-import { IsString, IsUUID } from 'class-validator';
+import { IsUserIdValid } from '../decorators/validator.decorator';
 
 export class FetchUser {
-    @IsString()
-    @IsUUID()
+    @IsUserIdValid()
     userId: string
 }

@@ -43,7 +43,6 @@ const orderBy = (data: FetchExpenses) => ({
   orderBy: [{ [FIELD_MAP[data.orderBy]]: data.ascending === '1' ? 'asc' : 'desc' }],
 });
 
-
 export async function fetchUserTransactions<T extends boolean>(query: FetchExpenses) {
   return await to(database().expenses.findMany({
     ...paginate(query),
