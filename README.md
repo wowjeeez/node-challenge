@@ -13,8 +13,9 @@
 - The endpoint supports paging and if omitted, the following default settings are used: 10 entries/page, and keeping track of the page id is the user's responsibility (to allow more flexible frontend design and to decrease complexity)
 - Page size is capped at 50 entries (configurable under the `pageSizeCap` config property)
 - In the expenses domain, not every query factory is unit tested because I felt that endpoint tests would better suit this pipeline
-- 
 
-# todo: 
-- Add CI
-- Create expenses/create route
+# Stats
+- Total time spent working: ~ 5 hours
+- Google searches: [REDACTED]
+- Eslint errors: 0
+- Coverage: quite good I'd say
