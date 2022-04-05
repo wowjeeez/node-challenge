@@ -8,6 +8,8 @@
        "express": "^4.17.0",
        "class-validator": "^0.13.2",
        "class-transformer-validator": "^0.9.1",
-       "class-transformer": "^0.5.1"
+       "class-transformer": "^0.5.1",
+       "@nc/domain-user": "0.0.0",
+       "uuid": "^8.3.2"
     }
   }

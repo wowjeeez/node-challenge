@@ -1,5 +1,5 @@
 import { FetchExpenses } from '../dto/get.dto';
-import { getTransactions } from '../model';
+import { getExpenses } from '../model';
 import { Router } from 'express';
 import { to } from '@nc/utils/async';
 import { transformAndValidate } from 'class-transformer-validator';
@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
   if (validationErr) {
     return next(ValidationError(validationErr, req));
   }
-  const [expError, expDetails] = await to(getTransactions(query));
+  const [expError, expDetails] = await to(getExpenses(query));
 
   if (expError) {
     return next(expError);

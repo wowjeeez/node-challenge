@@ -7,7 +7,7 @@
 - .env file is needed only because of Prisma, to be able to connect to the database while pulling/pushing database info
 - Added JSON body parsing feature with 100kb body limit (configurable with the `bodyLimit` config property)
 - Rewritten domain level routing logic to support more routes
-- Moved user id validation into its own decorator, so any route that requires a valid user can just pass the `IsUserIdValid` to it's DTO and assume that each call contains a valid user
+- Moved user id validation into its own decorator, so any route that requires a valid user can just pass the `IsUserIdValid` to it's DTO and assume that each call contains a valid user (this does introduce some coupling but in my opinion it's worth the tradeoff)
 # Design choices
 - I stuck with query parameter design and the expenses are filterable by amount, date, status, merchant name and currency and sortable by amount, date, status and merchant name
 - The endpoint supports paging and if omitted, the following default settings are used: 10 entries/page, and keeping track of the page id is the user's responsibility (to allow more flexible frontend design and to decrease complexity)

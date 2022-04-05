@@ -1,7 +1,11 @@
+import { AddExpense } from '../dto/add.dto';
 import config from 'config';
 import { database } from '@nc/utils/db';
+import type { expenses } from '@prisma/client';
+
 import { FetchExpenses } from '../dto/get.dto';
 import { to } from '@nc/utils/async';
+import { v4 } from 'uuid';
 
 const FIELD_MAP: Record<FetchExpenses['filterBy'], string> = {
   amount: 'amount_in_cents',
@@ -43,7 +47,7 @@ const orderBy = (data: FetchExpenses) => ({
   orderBy: [{ [FIELD_MAP[data.orderBy]]: data.ascending === '1' ? 'asc' : 'desc' }],
 });
 
-export async function fetchUserTransactions<T extends boolean>(query: FetchExpenses) {
+export async function fetchUserExpenses(query: FetchExpenses) {
   return await to(database().expenses.findMany({
     ...paginate(query),
     ...orderBy(query),
@@ -57,6 +61,19 @@ export async function fetchUserTransactions<T extends boolean>(query: FetchExpen
     where: {
       user_id: query.userId,
       ...createFilterQuery(query),
+    },
+  }));
+}
+export async function addExpense(dto: AddExpense) {
+  return await to(database().expenses.create({
+    data: {
+      user_id: dto.userId,
+      merchant_name: dto.merchantName,
+      currency: dto.currency,
+      status: dto.status,
+      date_created: dto.date,
+      id: dto.id,
+      amount_in_cents: dto.amountInCents,
     },
   }));
 }

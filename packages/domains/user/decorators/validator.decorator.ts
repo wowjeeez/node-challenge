@@ -1,5 +1,5 @@
 import { connect, database, isDbConnected } from '@nc/utils/db';
-import { registerDecorator, ValidationOptions } from 'class-validator';
+import { registerDecorator, ValidationOptions, isUUID } from 'class-validator';
 // validates a user id (used in DTOs)
 export function IsUserIdValid(validationOptions?: ValidationOptions) {
   return (object: Object, propertyName: string) => {
@@ -14,6 +14,7 @@ export function IsUserIdValid(validationOptions?: ValidationOptions) {
             connect();
           }
           if (typeof value !== 'string') return false;
+          if (!isUUID(value, 4)) return false;
           const len = await database().users.count({ where: { id: value } });
           return len > 0;
         },

@@ -1,15 +1,15 @@
 import { database } from '@nc/utils/db';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { v4 } from 'uuid';
+import { IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateUser {
-    @IsString()
+    @MaxLength(255)
     firstName: string;
 
-    @IsString()
+    @MaxLength(255)
     lastName: string;
 
-    @IsString()
+    @MaxLength(255)
     companyName: string;
 
     @IsOptional()

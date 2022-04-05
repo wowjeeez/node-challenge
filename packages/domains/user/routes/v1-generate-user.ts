@@ -14,11 +14,11 @@ router.post('/', async (req, res, next) => {
     return next(ValidationError(validationErr, req));
   }
 
-  const [err] = await to(createUser(arrayToFlat(dto)));
+  const [err, id] = await to(createUser(arrayToFlat(dto)));
 
   if (err) {
     return next(new ApiError(err, err.status, `Failed to create user: ${err}`, err.title, req));
   }
 
-  res.json({ created: true });
+  res.json({ created: true, id });
 });

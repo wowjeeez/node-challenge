@@ -22,4 +22,5 @@ export async function createUser(dto: CreateUser) {
   if (dbError) {
     throw InternalError('Error writing data to the DB.');
   }
+  return final.userId;
 }
