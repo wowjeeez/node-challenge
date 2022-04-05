@@ -1,5 +1,5 @@
 import { connect, database, isDbConnected } from '@nc/utils/db';
-import { registerDecorator, ValidationOptions, isUUID } from 'class-validator';
+import { isUUID, registerDecorator, ValidationOptions } from 'class-validator';
 // validates a user id (used in DTOs)
 export function IsUserIdValid(validationOptions?: ValidationOptions) {
   return (object: Object, propertyName: string) => {

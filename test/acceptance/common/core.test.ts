@@ -1,6 +1,4 @@
 import { Api } from '../utils/api';
-import { hook } from '../../../server';
-beforeAll(hook);
 
 describe('Given that we have a healthy service', () => {
   describe('Healtcheck', () => {

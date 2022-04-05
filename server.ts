@@ -13,7 +13,6 @@ import { createServer as createHTTPSServer, Server as SecureServer } from 'https
 import { router as transactionRoutes } from '@nc/domain-expense';
 const xss = require('xss-clean'); // no types :(
 
-
 const logger = Logger('server');
 // noop function to load this file into the runtime and allow express to start/db to connect
 export const hook = () => logger.log('Hook function called');

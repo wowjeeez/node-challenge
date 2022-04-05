@@ -6,7 +6,6 @@ import { to } from '@nc/utils/async';
 import { transformAndValidate } from 'class-transformer-validator';
 import { ApiError, ValidationError } from '@nc/utils/errors';
 
-
 export const router = Router();
 
 router.post('/', async (req, res, next) => {
